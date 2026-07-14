@@ -1,8 +1,9 @@
 const asyncHandler = (requestHandler)=>{
-    (req , res , next) => {
+     return (req , res , next) => {
         Promise.resolve(requestHandler(req , res , next)).catch((err) => next(err))
     }
 }
+//function returning a function
 
 
 export{ asyncHandler}
@@ -11,11 +12,11 @@ export{ asyncHandler}
 "USING TRY-CATCH INSTEAD OF PROMISES"
 const asyncHandler = (fun) => async(req , res , next) =>{
     try{
-    await fn (req , res , next)
+    await fun (req , res , next)
     } catch(error){
-     res.status(err.codr ||400).json({
+     res.status(error.code ||400).json({
      success:false,
-     message : err.message
+     message : error.message
      })
      }
     }

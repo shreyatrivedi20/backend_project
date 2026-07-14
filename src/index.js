@@ -1,9 +1,9 @@
 import dotenv from "dotenv"
-
+import { app } from "./app.js";
 import connectDB from "./db/index.js";
 
 dotenv.config({
-    path:'/.env'
+    path:'./.env'
 })
 
 
@@ -15,7 +15,7 @@ connectDB()
   })
 })
 .catch((err) => {
-   console.log("MongoDB connection failed ")
+   console.log("MongoDB connection failed ",err)
 });
 
   //whenever async method completes it returns promise

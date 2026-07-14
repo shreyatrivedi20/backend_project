@@ -23,4 +23,11 @@ app.use(express.static("public"))
 // to access user's browser cokkies ans set them i.e  perform CRUD operations
 app.use(cookieParser())
 
-export{ app }          
+//routes
+import userRouter from "./routes/user.routes.js"
+
+//routes declaration -> We directly cannot use `app.get` because there, we were writing the routes and controllers in the same file, but here we have completely separated the routes file. We are bringing the routes from that file to here, so we need to use this middleware. 
+
+app.use("/api/v1/users", userRouter)
+
+export{ app }           

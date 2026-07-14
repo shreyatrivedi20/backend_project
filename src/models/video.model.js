@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 import mongooseAggregatePaginate from "mongoose-aggregate-paginate-v2";
 
-const videoSchema = new Schema(
+const videoSchema = new mongoose.Schema(
     {
         videoFile:{
             type:String ,  // cloudinary url
@@ -25,22 +25,22 @@ const videoSchema = new Schema(
             required:true
         },
         views : {
-        type: Number,
-        deafult : 0,
+            type: Number,
+            default : 0,
         },
         isPublished:{
             type: Boolean,
-            deafult:true
+            default:true
         },
         owner:{
-            type: Schema.Types.ObjectId,
+            type: mongoose.Schema.Types.ObjectId,
             ref:"User" 
         }
 
 } 
 , {timestamps : true}
 )
-
+//for using  the aggregate functions over data feilds
 videoSchema.plugin(mongooseAggregatePaginate)
 
 export const Video = mongoose.model("Video", videoSchema)
