@@ -21,7 +21,7 @@ const userSchema =  new mongoose.Schema(
         lowercase:true,
         trim:true,
        },
-        fullname: {
+        fullName: {
         type : String,
         required:true,
         trim:true,
@@ -54,11 +54,11 @@ const userSchema =  new mongoose.Schema(
 
 //middlewares offered by mongoose(hooks)
 
-userSchema.pre("save" ,  async function(next) {
-    if( !this.isModified("password"))  return next();
-    this.password  = await  bcrypt.hash(this.password , 10)
-    next()
-})
+userSchema.pre("save", async function () {
+    if (!this.isModified("password")) return;
+
+    this.password = await bcrypt.hash(this.password, 10);
+});       
 
 //methods created by using "methods" function
 
@@ -72,7 +72,7 @@ userSchema.methods.generateAccessToken = function(){
         _id :this._id,
         email:this.email,
         username:this.username,
-        fullname:this.fullname
+        fullname:this.fullName
     },
     process.env.ACCESS_TOKEN_SECRET,
     {
